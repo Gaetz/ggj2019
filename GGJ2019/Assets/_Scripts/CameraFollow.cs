@@ -21,6 +21,9 @@ public class CameraFollow : MonoBehaviour {
 
 	[Tooltip("Time it takes to transition when the player is jumping or falling")]
 	[SerializeField] float verticalSmoothTime;
+
+	[Tooltip("Camera distance")]
+	[SerializeField] float cameraDistance = -10;
 	
 	FocusArea focusArea;
 
@@ -58,7 +61,7 @@ public class CameraFollow : MonoBehaviour {
 
 		focusPosition.y = Mathf.SmoothDamp(transform.position.y, focusPosition.y, ref smoothVelocityY, verticalSmoothTime);
 		focusPosition += Vector2.right * currentLookAheadX;
-		transform.position = (Vector3)focusPosition + Vector3.forward * -10;
+		transform.position = (Vector3)focusPosition + Vector3.forward * cameraDistance;
 	}
 
 	void OnDrawGizmos() {

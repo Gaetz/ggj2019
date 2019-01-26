@@ -42,18 +42,18 @@ public abstract class Raycaster {
 		}
 	}
 
-	public void UpdateOrigin(Rect bounds) {
-		ComputeRaySpacing(bounds);
+	public void UpdateOrigin(Rect bounds, Vector2 offset) {
+		ComputeRaySpacing(bounds, offset);
 		offsetPoints = ComputeOffsets();
 	}
 
-	protected void ComputeRaySpacing(Rect colliderBounds) {
-		raycastStart.bottomLeft = new Vector2(-colliderBounds.size.x / 2, -colliderBounds.size.y / 2 + margin);
-		raycastStart.bottomRight = new Vector2(colliderBounds.size.x / 2, -colliderBounds.size.y / 2 + margin);
-		raycastStart.topLeft = new Vector2(-colliderBounds.size.x / 2, colliderBounds.size.y / 2 - margin);
-		raycastStart.topRight = new Vector2(colliderBounds.size.x / 2, colliderBounds.size.y / 2- margin);
-		raycastStart.centerLeft = new Vector2(-colliderBounds.size.x / 2, 0);
-		raycastStart.centerRight = new Vector2(colliderBounds.size.x / 2, 0);
+	protected void ComputeRaySpacing(Rect colliderBounds, Vector2 offset) {
+		raycastStart.bottomLeft = new Vector2(-colliderBounds.size.x / 2, -colliderBounds.size.y / 2 + margin) + offset;
+		raycastStart.bottomRight = new Vector2(colliderBounds.size.x / 2, -colliderBounds.size.y / 2 + margin) + offset;
+		raycastStart.topLeft = new Vector2(-colliderBounds.size.x / 2, colliderBounds.size.y / 2 - margin) + offset;
+		raycastStart.topRight = new Vector2(colliderBounds.size.x / 2, colliderBounds.size.y / 2 - margin) + offset;
+		raycastStart.centerLeft = new Vector2(-colliderBounds.size.x / 2, 0) + offset;
+		raycastStart.centerRight = new Vector2(colliderBounds.size.x / 2, 0) + offset;
 
 		hRayCount = Mathf.Clamp(hRayCount, 2, int.MaxValue);
 		vRayCount = Mathf.Clamp(vRayCount, 2, int.MaxValue);

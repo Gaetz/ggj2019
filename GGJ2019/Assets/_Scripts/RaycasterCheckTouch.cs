@@ -14,7 +14,7 @@ public class RaycasterCheckTouch : Raycaster {
 	}
 
 	private RaycastHit2D Raycast(Vector2 start, Vector2 direction, float length, LayerMask layerMask) {
-		//Debug.DrawLine(start, start + direction * length, Color.red);
+		Debug.DrawLine(start, start + direction * length, Color.red);
 		return Physics2D.Raycast(start, direction, length, layerMask);
 	}
 

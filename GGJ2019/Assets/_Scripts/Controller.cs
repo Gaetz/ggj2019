@@ -98,17 +98,13 @@ public class Controller : MonoBehaviour {
 	}
 
 	void Reset() {
-		box = new Rect(
-			boxCollider.bounds.min.x,
-			boxCollider.bounds.min.y,
-			boxCollider.bounds.size.x,
-			boxCollider.bounds.size.y
-		);
-		raycastDown.UpdateOrigin(box);
-		raycastUp.UpdateOrigin(box);
-		raycastLeft.UpdateOrigin(box);
-		raycastRight.UpdateOrigin(box);
-		groundDown.UpdateOrigin(box);
+		box = GetColliderRect();
+		Vector2 offset = GetColliderOffset();
+		raycastDown.UpdateOrigin(box, offset);
+		raycastUp.UpdateOrigin(box, offset);
+		raycastLeft.UpdateOrigin(box, offset);
+		raycastRight.UpdateOrigin(box, offset);
+		groundDown.UpdateOrigin(box, offset);
 		state.MovingPlatform = null;
 	}
 
@@ -259,16 +255,25 @@ public class Controller : MonoBehaviour {
 	}
 
 	void FixPosition() {
-		box = new Rect(
+		box = GetColliderRect();
+		Vector2 offset = GetColliderOffset();
+		groundDown.UpdateOrigin(box, offset);
+		float floorDistance = groundDown.Cast(transform.position, box);
+		if(floorDistance < 0 && !state.Climbing && !state.Descending) {
+			transform.Translate(new Vector2(0, -floorDistance + DataAccess.Instance.EngineMoveData.throughFloorMargin));
+		}
+	}
+
+	Rect GetColliderRect() {
+		return new Rect(
 			boxCollider.bounds.min.x,
 			boxCollider.bounds.min.y,
 			boxCollider.bounds.size.x,
 			boxCollider.bounds.size.y
 		);
-		groundDown.UpdateOrigin(box);
-		float floorDistance = groundDown.Cast(transform.position, box);
-		if(floorDistance < 0 && !state.Climbing && !state.Descending) {
-			transform.Translate(new Vector2(0, -floorDistance + DataAccess.Instance.EngineMoveData.throughFloorMargin));
-		}
+	}
+
+	Vector2 GetColliderOffset() {
+		return boxCollider.offset;
 	}
 }
