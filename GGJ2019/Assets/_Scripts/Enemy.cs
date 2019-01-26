@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	enum EnemyState { Approching, RandomMove }
+	enum EnemyState { Patrol, Taunting, Shoot }
 
 	[SerializeField] float speed;
+	[SerializeField] float tauntDistance;
+	[SerializeField] float shootDistance;
+
+
 
 	bool randomMove;
 	PolygonCollider2D collide;
 	Rigidbody2D rbody;
 	Transform player;
-	EnemyState state;
+	FollowPath follow;
+	Animator animator;
 
+
+	EnemyState state;
 	float counter;
 
 	// Use this for initialization
@@ -21,23 +28,33 @@ public class Enemy : MonoBehaviour {
 		collide = GetComponent<PolygonCollider2D>();
 		rbody = GetComponent<Rigidbody2D>();
 		player = GameObject.FindGameObjectWithTag("Player").transform;
-		state = EnemyState.Approching;
+		state = EnemyState.Patrol;
+		follow = GetComponent<FollowPath>();
+		animator = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		counter += Time.deltaTime;
+		Vector3 between = player.transform.position - transform.position;
 		switch(state) {
-
-			case EnemyState.Approching:
-				Vector3 between = player.transform.position - transform.position;
-				if(between.magnitude > speed) {
-					transform.Translate(between * speed * Time.deltaTime / between.magnitude);
+			case EnemyState.Patrol:
+				if(between.magnitude <= tauntDistance) {
+					follow.StopPatrol = true;
+					state = EnemyState.Taunting;
 				}
 			break;
 
-			case EnemyState.RandomMove:
-			
+			case EnemyState.Taunting:
+				// TODO Launch taunt animation 
+				// Animation.Play("")
+				if(between.magnitude <= shootDistance) {
+					state = EnemyState.Shoot;
+				}
+			break;
+
+			case EnemyState.Shoot:
+
 			break;
 		}
 	}
