@@ -11,6 +11,10 @@ public class ShootTarget : MonoBehaviour {
 	public int CurrentHp { get { return hp; } set { hp = value; } }
 
 
+	void Start() {
+		hp = MaxHp;
+	}
+
 	public void Damage(int damage) {
 		if(gameObject.tag == "Player") damage = 1;
 		hp -= damage;
