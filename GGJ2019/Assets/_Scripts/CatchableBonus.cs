@@ -9,7 +9,7 @@ public class CatchableBonus : MonoBehaviour {
 	public void OnTriggerExit2D(Collider2D other) {
 		if(other.gameObject.tag == "Player") {
 			other.gameObject.GetComponent<SpecialAttackState>().AddSpecial(bonusValue);
+			Destroy(gameObject);
 		}
-		Destroy(gameObject);
 	}
 }
