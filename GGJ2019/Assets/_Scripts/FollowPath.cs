@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour {
+public class FollowPath : MonoBehaviour {
 
 	[SerializeField] float speed;
 	[SerializeField] Transform[] waypoints;
@@ -19,7 +19,7 @@ public class MovingPlatform : MonoBehaviour {
 	}
 
 	void Start () {
-
+		currentWp = 0;
 	}
 	
 	void FixedUpdate () {

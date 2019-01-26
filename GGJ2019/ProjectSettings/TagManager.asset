@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Initializer
   - Enemy
+  - Bonus
   layers:
   - Default
   - TransparentFX
