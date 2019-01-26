@@ -83,6 +83,7 @@ public class Controller : MonoBehaviour {
 		int wantedDirectionX = GetSign(inputX);
 		int velocityDirection = GetSign(velocity.x);
 
+		HandleVerticalAim(GetSign(inputY));
 		HandleHorizontalVelocity(wantedDirectionX, velocityDirection);
 		HandleGravity();
 		HandleMovingPlatform();
@@ -171,6 +172,24 @@ public class Controller : MonoBehaviour {
 		}
 	}
 
+	void HandleVerticalAim(int vDir) {
+		switch(vDir) {
+			case -1:
+				if(!state.Grounded) {
+					state.VerticalDirection = VerticalDirection.Down;
+				} else {
+					state.VerticalDirection = VerticalDirection.Normal;
+				}
+				break;
+			case 0:
+				state.VerticalDirection = VerticalDirection.Normal;
+				break;
+			case 1:
+				state.VerticalDirection = VerticalDirection.Up;
+				break;
+		}
+	}
+
 	void HandleMove(Vector2 wantedMove) {
 		if (velocity.y > 0) {
 			raycastUp.Cast(transform.position, wantedMove.y, ref move);
@@ -220,7 +239,7 @@ public class Controller : MonoBehaviour {
 		}
 		if (wantedDirectionX != 0) {
 			spriteRenderer.flipX = wantedDirectionX < 0;
-			state.Direction = wantedDirectionX < 0 ? Direction.Left : Direction.Right;
+			state.horizontalDirection = wantedDirectionX < 0 ? HorizontalDirection.Left : HorizontalDirection.Right;
 		}
 	}
 

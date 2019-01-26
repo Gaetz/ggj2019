@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public enum Direction { Left, Right }
-public enum VerticalDirection { Normal, Up, Bottom }
+public enum HorizontalDirection { Left, Right }
+public enum VerticalDirection { Normal, Up, Down }
 
 public class ControllerState : MonoBehaviour {
 
@@ -10,11 +10,15 @@ public class ControllerState : MonoBehaviour {
 		descending = false;
 		grounded = false;
 		falling = false;
-		direction = Direction.Right;
+		hDirection = HorizontalDirection.Right;
 	}
 
-	public Direction Direction { get {return direction;} set { direction = value; } }
-	Direction direction;
+	public HorizontalDirection horizontalDirection { get {return hDirection;} set { hDirection = value; } }
+	HorizontalDirection hDirection;
+
+	public VerticalDirection VerticalDirection { get {return vDirection;} set { vDirection = value; } }
+	VerticalDirection vDirection;
+
 
 	public bool Climbing { get { return climbing; } set { climbing = value; } }
 	bool climbing;
