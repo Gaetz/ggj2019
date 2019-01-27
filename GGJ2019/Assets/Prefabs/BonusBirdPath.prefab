@@ -311,6 +311,7 @@ MonoBehaviour:
   - {fileID: 4889713528293662}
   - {fileID: 4425235128897696}
   - {fileID: 4917707322220596}
+  flip: 0
 --- !u!212 &212283730139485966
 SpriteRenderer:
   m_ObjectHideFlags: 1
