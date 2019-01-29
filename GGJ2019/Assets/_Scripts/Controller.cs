@@ -220,10 +220,14 @@ public class Controller : MonoBehaviour {
 			animator.Play("Jump");
 		} else {
 			if (state.Grounded) {
-				if(wantedDirectionX == 0) {
-					animator.Play("Idle");
+				if(state.Shooting) {
+					animator.Play("Player shoot");
 				} else {
-					animator.Play("Move");
+					if(wantedDirectionX == 0) {
+						animator.Play("Idle");
+					} else {
+						animator.Play("Move");
+					}
 				}
 			} else {
 				if (velocity.y < 0) {

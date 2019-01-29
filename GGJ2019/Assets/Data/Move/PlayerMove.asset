@@ -17,8 +17,8 @@ MonoBehaviour:
   gravity: 2
   maxFallSpeed: 20
   xAccel: 10
-  xDecel: 40
-  xMaxSpeed: 25
+  xDecel: 55
+  xMaxSpeed: 10
   xSnapSpeed: 2
   jumpStartSpeed: 10
   jumpMaxHoldPeriod: 0.2

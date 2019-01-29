@@ -20,6 +20,9 @@ public class DialogSystem : MonoBehaviour {
 	[Tooltip("Time between letter when dialog input (Return by default) is pressed")]
 	[SerializeField] float letterMultiplier = 0.005f;
 
+	[Tooltip("Time waited for the sentence")]
+	[SerializeField] float nextSentenceTime = 1f;
+
 	[Tooltip("Dialog input key")]
 	[SerializeField] KeyCode dialogInput = KeyCode.Return;
 	public string[] dialogLines;
@@ -28,6 +31,8 @@ public class DialogSystem : MonoBehaviour {
 	bool dialogActive = false;
 	bool dialogEnded = false;
 	public bool outOfRange = true;
+	float nextCounter;
+	bool waitForEnd;
 
 	[SerializeField] AudioClip audioClip;
 	AudioSource audioSource;
@@ -36,6 +41,7 @@ public class DialogSystem : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 		dialogText.text = "";		
 		dialogGUI.SetActive(false);
+		nextCounter = 0;
 	}
 
 	public void EnterRangeOfNPC() {
@@ -48,6 +54,7 @@ public class DialogSystem : MonoBehaviour {
 
 	public void TriggerDialog() {
 		outOfRange = false;
+		waitForEnd = false;
 		dialogBoxGUI.gameObject.SetActive(true);
 		if(!dialogActive) {
 			dialogActive = true;
@@ -71,7 +78,9 @@ public class DialogSystem : MonoBehaviour {
 				yield return 0;
 			}
 			while(true) {
-				if(Input.GetKeyDown(dialogInput) && dialogEnded == false) {
+				nextCounter += Time.deltaTime;
+				if( nextCounter > nextSentenceTime && dialogEnded == false) {
+					nextCounter = 0;
 					break;
 				}
 				yield return 0;
@@ -92,13 +101,13 @@ public class DialogSystem : MonoBehaviour {
 				dialogText.text += stringToDisplay[currentCharacterIndex];
 				currentCharacterIndex++;
 				if (currentCharacterIndex < stringLength) {
-					if (Input.GetKey(dialogInput)) {
+					/* if (Input.GetKey(dialogInput)) {
 						yield return new WaitForSeconds(letterDelay * letterMultiplier);
 						if(audioClip) audioSource.PlayOneShot(audioClip, 0.5f);
-					} else {
+					} else {*/
 						yield return new WaitForSeconds(letterDelay);
 						if(audioClip) audioSource.PlayOneShot(audioClip, 0.5f);
-					}
+					//}
 				} else {
 					dialogEnded = false;
 					break;
@@ -106,7 +115,9 @@ public class DialogSystem : MonoBehaviour {
 			}
 
 			while (true) {
-				if (Input.GetKeyDown(dialogInput)) { 
+				nextCounter += Time.deltaTime;
+				if(nextCounter > nextSentenceTime) {
+					nextCounter = 0;
 					break;
 				}
 				yield return 0;
@@ -114,7 +125,7 @@ public class DialogSystem : MonoBehaviour {
 
 			dialogEnded = false;
 			isLetterMultiplied = false;
-			dialogText.text = "";
+			//dialogText.text = "";
 		}
 	}
 

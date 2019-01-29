@@ -10,6 +10,7 @@ public class WeaponShoot : MonoBehaviour {
 	[SerializeField] WeaponData weaponData;
 	[SerializeField] Shooter shooter;
 
+	Animator animator;
 	ControllerState state;
 	bool isAutoshooting;
 	bool isPlayer;
@@ -28,6 +29,7 @@ public class WeaponShoot : MonoBehaviour {
 
 	void Start() {
 		state = GetComponent<ControllerState>();
+		animator = GetComponent<Animator>();
 		isAutoshooting = false;
 		isPlayer = shooter == Shooter.Player;
 		player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -45,7 +47,11 @@ public class WeaponShoot : MonoBehaviour {
 
 	public void UpdatePlayer() {
 		cooldownCounter += Time.deltaTime;
+		if (cooldownCounter > weaponData.cooldown) {
+			state.Shooting = false;
+		}
 		if(Input.GetButton("Fire1") && cooldownCounter > weaponData.cooldown) {
+			state.Shooting = true;
 			ShootOnce();
 		}
 	}

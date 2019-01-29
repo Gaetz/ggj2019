@@ -32,6 +32,9 @@ public class ControllerState : MonoBehaviour {
 	public bool Falling { get { return falling; } set { falling = value; } }
 	bool falling;
 
+	public bool Shooting { get { return shooting; } set { shooting = value; } }
+	bool shooting;
+
 	public MovingPlatform MovingPlatform { get { return movingPlatform; } set { movingPlatform = value; } }
 	MovingPlatform movingPlatform;
 

@@ -6,6 +6,8 @@ public class Projectile : MonoBehaviour {
 
 		[SerializeField] float rotationSpeed;
 		[SerializeField] ParticleSystem trail;
+		[SerializeField] AudioClip sound;
+
 
 		float angle;
 		float speed;
@@ -28,6 +30,8 @@ public class Projectile : MonoBehaviour {
 		particles.Stop();
 		stopMove = false;
 		runningTrail = Instantiate(trail);
+		runningTrail.Stop();
+		sound.LoadAudioData();
 	}
 
 	public void Setup(float angle, float speed, float lifetime, int damage, float gravityScale, float mass, Shooter shooter, bool flipY) {
@@ -45,9 +49,14 @@ public class Projectile : MonoBehaviour {
 		if(lifetime > 0) {
 			Destroy(gameObject, lifetime);
 			Destroy(runningTrail, lifetime);
-			Invoke("DestroyTrail", lifetime - 0.02f);
+			if(shooter == Shooter.Player) {
+				Invoke("DestroyTrail", lifetime - 0.02f);
+			}
 		}
-		runningTrail.Play();
+		if(shooter == Shooter.Player) {
+			runningTrail.Play();
+		}
+		AudioSource.PlayClipAtPoint(sound, transform.position);
 	}
 
 	void Update() {
@@ -74,6 +83,8 @@ public class Projectile : MonoBehaviour {
 		if(shooter == Shooter.Enemy && other.gameObject.tag == "Enemy") {
 			return;
 		}
+		if(other.gameObject.layer == 0)
+			return;
 		if(other.gameObject.layer != gameObject.layer) {
 			runningTrail.Stop();
 			runningTrail.Clear();

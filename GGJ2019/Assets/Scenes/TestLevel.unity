@@ -516,6 +516,53 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67f4d4720c749d147a9a461dd09b947f, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1001 &750514051
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965482570013754, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690168457637332, guid: f36182f92a84fa444a95a803bdfe8772,
+        type: 2}
+      propertyPath: ChatBackground
+      value: 
+      objectReference: {fileID: 1058401730}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f36182f92a84fa444a95a803bdfe8772, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1001 &758737105
 Prefab:
   m_ObjectHideFlags: 0
@@ -755,11 +802,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4903493271222408, guid: 649e50a7c6815024ebb427fe85b088af, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 22.49
+      value: 3.34
       objectReference: {fileID: 0}
     - target: {fileID: 4903493271222408, guid: 649e50a7c6815024ebb427fe85b088af, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.96
+      value: 1.86
       objectReference: {fileID: 0}
     - target: {fileID: 4903493271222408, guid: 649e50a7c6815024ebb427fe85b088af, type: 2}
       propertyPath: m_LocalPosition.z
@@ -785,6 +832,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114753311834059090, guid: 649e50a7c6815024ebb427fe85b088af,
+        type: 2}
+      propertyPath: playerShoot
+      value: 
+      objectReference: {fileID: 1296424428}
+    - target: {fileID: 114753311834059090, guid: 649e50a7c6815024ebb427fe85b088af,
+        type: 2}
+      propertyPath: enemyShuriken
+      value: 
+      objectReference: {fileID: 1296424427}
+    - target: {fileID: 114753311834059090, guid: 649e50a7c6815024ebb427fe85b088af,
+        type: 2}
+      propertyPath: enemyPoop
+      value: 
+      objectReference: {fileID: 1296424426}
     - target: {fileID: 114537318366638536, guid: 649e50a7c6815024ebb427fe85b088af,
         type: 2}
       propertyPath: jumpSfx
@@ -897,6 +959,22 @@ Prefab:
       propertyPath: ChatBackground
       value: 
       objectReference: {fileID: 1058401730}
+    - target: {fileID: 61206944736053682, guid: f1cc5ae5bc047be4b867098e1e64f136,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 61206944736053682, guid: f1cc5ae5bc047be4b867098e1e64f136,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114261002450374648, guid: f1cc5ae5bc047be4b867098e1e64f136,
+        type: 2}
+      propertyPath: sentences.Array.data[0]
+      value: Hey hey hey! bloblbolboolbllboblb fvfvvsvs sdvsdvsd sd dscsdcsdc dcsdcsdcds
+        dssd dsds
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f1cc5ae5bc047be4b867098e1e64f136, type: 2}
   m_IsPrefabAsset: 0
@@ -1153,6 +1231,21 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a0bee7f64bbb9946a0640b464588021, type: 2}
   m_IsPrefabAsset: 0
+--- !u!82 &1296424426 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82925936187879082, guid: 8a0bee7f64bbb9946a0640b464588021,
+    type: 2}
+  m_PrefabInternal: {fileID: 1296424425}
+--- !u!82 &1296424427 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82389569187159032, guid: 8a0bee7f64bbb9946a0640b464588021,
+    type: 2}
+  m_PrefabInternal: {fileID: 1296424425}
+--- !u!82 &1296424428 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 82856081957965892, guid: 8a0bee7f64bbb9946a0640b464588021,
+    type: 2}
+  m_PrefabInternal: {fileID: 1296424425}
 --- !u!20 &1300341447 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 20586848747453000, guid: 8a0bee7f64bbb9946a0640b464588021,

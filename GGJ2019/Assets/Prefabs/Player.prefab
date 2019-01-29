@@ -42,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1331485250133708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.49, y: 2.96, z: 0}
+  m_LocalPosition: {x: 14.62, y: 5.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +85,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.024, y: 1.024}
-    newSize: {x: 0.32, y: 0.48}
+    newSize: {x: 10.24, y: 10.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1331485250133708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0295ef9bb91af2b438fa2a10f4701041, type: 3}
+  m_Script: {fileID: 11500000, guid: e288a30020cb62346ad556dfa5f693fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpecial: 50
@@ -160,9 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d12bd4d51290f1429e4749e95b138eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 114770542547797750, guid: 8cd34dc2ebee7e14490520387f4d89c7,
+  projectile: {fileID: 114687058071576470, guid: 2d6f15aa5fe8ffb459786a9e20f2d03b,
     type: 2}
-  weaponData: {fileID: 11400000, guid: 75eb5ee712f97be469794e51832436bf, type: 2}
+  weaponData: {fileID: 11400000, guid: fead42e28a1953041b1a139021f62a5a, type: 2}
   shooter: 0
 --- !u!114 &114796651436012032
 MonoBehaviour:
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2d2950be18ed54aac8448bd131b2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1
+  maxHp: 9
   invincibilityDuration: 0
 --- !u!212 &212806509148937192
 SpriteRenderer:
@@ -192,7 +192,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: efbfe027f06b18f43b2222ce68328e10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,12 +212,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: aafc2601f68c0a14696d8031d273e111, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 657278b29205b3d408b644a0dd6f217a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.48}
+  m_Size: {x: 10.24, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
 	[SerializeField] float shootDistance;
 	[SerializeField] float shootDuration;
 	[SerializeField] float reloadDuration;
-
+	[SerializeField] AudioClip tauntSfx;
 
 
 	bool randomMove;
@@ -40,20 +40,24 @@ public class Enemy : MonoBehaviour {
 		hasShot = false;
 		weaponShoot = GetComponent<WeaponShoot>();
 		sprite = GetComponent<SpriteRenderer>();
+		tauntSfx.LoadAudioData();
 	}
 	
 	void Update () {
 		// State
 		if(follow.Velocity.x < 0) {
 			controllerState.horizontalDirection = HorizontalDirection.Left;
+			sprite.flipX = true;
 		} else if(follow.Velocity.x > 0) {
 			controllerState.horizontalDirection = HorizontalDirection.Right;
+			sprite.flipX = false;
 		}
 
 		// Behaviour
 		Vector3 between = player.transform.position - transform.position;
 		switch(state) {
 			case EnemyState.Patrol:
+				animator.Play("Ennemy move");
 				if(between.magnitude <= tauntDistance) {
 					follow.StopPatrol = true;
 					state = EnemyState.Taunting;
@@ -64,6 +68,8 @@ public class Enemy : MonoBehaviour {
 				// TODO Launch taunt animation 
 				// Animation.Play("")
 				TurnTowardPlayer();
+				animator.Play("Ennemy detect");
+				AudioSource.PlayClipAtPoint(tauntSfx, transform.position);
 				if(between.magnitude <= shootDistance) {
 					state = EnemyState.Shoot;
 				} else if (between.magnitude > tauntDistance) {
@@ -77,6 +83,7 @@ public class Enemy : MonoBehaviour {
 				if(!hasShot) {
 					float targetAngle = Vector2.Angle(Vector2.right, player.position - transform.position);
 					weaponShoot.AutoShoot(targetAngle);
+					animator.Play("Ennemy shoot");
 					hasShot = true;
 				}
 				if (shootCounter >= shootDuration) {
@@ -113,9 +120,9 @@ public class Enemy : MonoBehaviour {
 	void TurnTowardPlayer() {
 		bool isPlayerLeft = player.position.x < transform.position.x;
 		if(isPlayerLeft) {
-			sprite.flipX = false;
-		} else {
 			sprite.flipX = true;
+		} else {
+			sprite.flipX = false;
 		}
 	}
 }

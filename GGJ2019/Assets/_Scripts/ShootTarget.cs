@@ -7,6 +7,9 @@ public class ShootTarget : MonoBehaviour {
 
 	[SerializeField] int maxHp;
 	[SerializeField] float invincibilityDuration;
+	[SerializeField] AudioClip dieSound;
+	[SerializeField] AudioClip hitSound;
+
 	int hp;
 	SpriteRenderer sprite;
 
@@ -21,6 +24,12 @@ public class ShootTarget : MonoBehaviour {
 		sprite = GetComponent<SpriteRenderer>();
 		hp = MaxHp;
 		invincibilityCounter = 0;
+		if(hitSound) {
+			hitSound.LoadAudioData();
+		}
+		if(dieSound) {
+			dieSound.LoadAudioData();
+		}
 	}
 
 	public void Damage(int damage) {
@@ -48,10 +57,17 @@ public class ShootTarget : MonoBehaviour {
 		if (hp < 0) {
 			if(gameObject.tag == "Player") {
 				DataAccess.Instance.RemoveLive();
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+				if(DataAccess.Instance.Lives <= 0) {
+					SceneManager.LoadScene("Gameover");
+				} else {
+					SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+				}
 			} else {
 				Destroy();
 			}
+			if(dieSound != null) AudioSource.PlayClipAtPoint(dieSound, transform.position);
+		} else {
+			if(hitSound != null) AudioSource.PlayClipAtPoint(hitSound, transform.position);
 		}
 	}
 
