@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-	enum EnemyState { Patrol, Taunting, Shoot, ShootReload }
+	public enum EnemyState { Patrol, Taunting, Shoot, ShootReload, Death }
 
 	[SerializeField] float tauntDistance;
 	[SerializeField] float shootDistance;
@@ -107,8 +107,24 @@ public class Enemy : MonoBehaviour {
 				if (between.magnitude > tauntDistance) {
 					BackToPatrol();
 				}
-			break; 
-		}
+			break;
+
+            case EnemyState.Death:
+                // TODO Launch death animation 
+                // Animation.Play("")
+                TurnTowardPlayer();
+                animator.Play("Ennemy death");
+                AudioSource.PlayClipAtPoint(tauntSfx, transform.position);
+                if (between.magnitude <= shootDistance)
+                {
+                    //state = EnemyState.Shoot;
+                }
+                else if (between.magnitude > tauntDistance)
+                {
+                    //state = EnemyState.Patrol;
+                }
+                break;
+        }
 	}
 	
 	void BackToPatrol() {
@@ -117,7 +133,15 @@ public class Enemy : MonoBehaviour {
 		hasShot = false;
 	}
 
-	void TurnTowardPlayer() {
+    public void Die()
+    {
+        state = EnemyState.Death;
+        shootCounter = 0;
+        Destroy(rbody);
+        hasShot = false;
+    }
+
+    void TurnTowardPlayer() {
 		bool isPlayerLeft = player.position.x < transform.position.x;
 		if(isPlayerLeft) {
 			sprite.flipX = true;

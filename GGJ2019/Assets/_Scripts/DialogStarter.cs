@@ -27,9 +27,9 @@ public class DialogStarter : MonoBehaviour {
 			string[] oneSentence = new string[1] { sentences[8 - DataAccess.Instance.Lives] };
 			if (!isDialogDisplayed && other.gameObject.tag == "Player") {
 					isDialogDisplayed = true;
-					Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-					pos.y += dialogAbovePosition;
-					ChatBackground.position = pos;
+					//Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+					//pos.y += dialogAbovePosition;
+					//ChatBackground.position = pos;
 					dialogSystem.EnterRangeOfNPC();
 					dialogSystem.dialogLines = oneSentence;
 					dialogSystem.TriggerDialog();
@@ -38,7 +38,10 @@ public class DialogStarter : MonoBehaviour {
 	}
 
 	public void OnTriggerExit2D(Collider2D other) {
-		dialogSystem.OutOfRange();
-		isDialogDisplayed = false;
+        if (isDialogDisplayed && other.gameObject.tag == "Player")
+        {
+            dialogSystem.OutOfRange();
+            isDialogDisplayed = false;
+        }
 	}
 }

@@ -6,7 +6,8 @@ public class Projectile : MonoBehaviour {
 
 		[SerializeField] float rotationSpeed;
 		[SerializeField] ParticleSystem trail;
-		[SerializeField] AudioClip sound;
+    [SerializeField] ParticleSystem flakes;
+    [SerializeField] AudioClip sound;
 
 
 		float angle;
@@ -50,30 +51,38 @@ public class Projectile : MonoBehaviour {
 			Destroy(gameObject, lifetime);
 			Destroy(runningTrail, lifetime);
 			if(shooter == Shooter.Player) {
-				Invoke("DestroyTrail", lifetime - 0.02f);
+				//Invoke("DestroyTrail", lifetime - 0.02f);
 			}
 		}
 		if(shooter == Shooter.Player) {
-			runningTrail.Play();
+
+            if (runningTrail)
+            {
+                runningTrail.Play();
+            }
 		}
 		AudioSource.PlayClipAtPoint(sound, transform.position);
 	}
 
 	void Update() {
-		runningTrail.transform.position = transform.position;
+        if (runningTrail) { runningTrail.transform.position = transform.position; }
 		if(rb.gravityScale == 0) {
 			rb.velocity = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * speed * Time.deltaTime;
 		}
 		if(stopMove) {
 			rb.velocity = Vector2.zero;
 		} else {
-			transform.RotateAround(transform.position, Vector3.forward, rotationSpeed * Time.deltaTime);
+			
 		}
-	}
+        transform.RotateAround(transform.position, Vector3.forward, rotationSpeed * Mathf.Repeat(Time.time /300, 360));
+    }
 
 	void DestroyTrail() {
-			runningTrail.Stop();
-			runningTrail.Clear();
+        if (runningTrail)
+        {
+            runningTrail.Stop();
+            runningTrail.Clear();
+        }
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -86,16 +95,30 @@ public class Projectile : MonoBehaviour {
 		if(other.gameObject.layer == 0)
 			return;
 		if(other.gameObject.layer != gameObject.layer) {
-			runningTrail.Stop();
-			runningTrail.Clear();
-			particles.Play();
-			stopMove = true;
+            if (runningTrail)
+            {
+                runningTrail.Stop();
+                //runningTrail.Clear();
+            }
+
+            particles.Play();
+            if (flakes) { Instantiate(flakes, rb.transform.position, Quaternion.identity); }
+            stopMove = true;
 			spriteRenderer.enabled = false;
 			ShootTarget target = other.gameObject.GetComponent<ShootTarget>();
+
 			if(target) {
 				target.Damage(damage);
-			}
-			Destroy(gameObject, 0.15f);
+                //ParticleSystem DamageParticles = Instantiate(trail);
+                //DamageParticles.Play();
+            }
+			Destroy(gameObject);
+            //Destroy(runningTrail);
 		}
-	}
+        if (other.gameObject.tag == "Enemy")
+        {
+            Instantiate(flakes, rb.transform.position, Quaternion.identity);
+        }
+
+    }
 }

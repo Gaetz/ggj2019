@@ -280,6 +280,7 @@ MonoBehaviour:
   invincibilityDuration: 0
   dieSound: {fileID: 8300000, guid: 954cf6dfe047cd249b2509d584f005b0, type: 3}
   hitSound: {fileID: 8300000, guid: d60860ebddc60474785b03ab73c3e461, type: 3}
+  blood: {fileID: 198699587018740922, guid: f8812b6ff943d1b46b28e440c631c85c, type: 2}
 --- !u!114 &114857988823535932
 MonoBehaviour:
   m_ObjectHideFlags: 1

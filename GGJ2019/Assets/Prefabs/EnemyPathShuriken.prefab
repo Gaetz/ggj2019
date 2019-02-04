@@ -191,7 +191,7 @@ Animator:
   m_GameObject: {fileID: 1016508097839568}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fa3225e817cedfc438a7eff36ed71a87, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9ca98aed8c789114f80b2f6cf99206ee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   invincibilityDuration: 0
   dieSound: {fileID: 8300000, guid: 954cf6dfe047cd249b2509d584f005b0, type: 3}
   hitSound: {fileID: 8300000, guid: d60860ebddc60474785b03ab73c3e461, type: 3}
+  blood: {fileID: 198699587018740922, guid: f8812b6ff943d1b46b28e440c631c85c, type: 2}
 --- !u!114 &114240818726256010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,10 +265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24767fd93de301148b996182b03449fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 3
   waypoints:
-  - {fileID: 4219879885848932, guid: 6b768e2c694dc214f9b44a5be9649445, type: 2}
-  - {fileID: 4678588292872958, guid: 6b768e2c694dc214f9b44a5be9649445, type: 2}
+  - {fileID: 4085304440624226}
+  - {fileID: 4453789386901700}
   flip: 1
 --- !u!114 &114745174809199062
 MonoBehaviour:
@@ -291,9 +292,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d12bd4d51290f1429e4749e95b138eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 114770542547797750, guid: 8cd34dc2ebee7e14490520387f4d89c7,
+  projectile: {fileID: 114043221048053510, guid: 6df0eb034e11aa14ebf13b9a28a8f172,
     type: 2}
-  weaponData: {fileID: 11400000, guid: 75eb5ee712f97be469794e51832436bf, type: 2}
+  weaponData: {fileID: 11400000, guid: 91d9d3a7bcea11045820434e4a647d86, type: 2}
   shooter: 1
 --- !u!212 &212252925096166968
 SpriteRenderer:

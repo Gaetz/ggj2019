@@ -9,8 +9,10 @@ public class ShootTarget : MonoBehaviour {
 	[SerializeField] float invincibilityDuration;
 	[SerializeField] AudioClip dieSound;
 	[SerializeField] AudioClip hitSound;
+    [SerializeField] ParticleSystem blood;
+    public Enemy Enmy;
 
-	int hp;
+    int hp;
 	SpriteRenderer sprite;
 
 	bool isInvicible;
@@ -22,7 +24,8 @@ public class ShootTarget : MonoBehaviour {
 
 	void Start() {
 		sprite = GetComponent<SpriteRenderer>();
-		hp = MaxHp;
+        Enmy = GetComponent<Enemy>();
+        hp = MaxHp;
 		invincibilityCounter = 0;
 		if(hitSound) {
 			hitSound.LoadAudioData();
@@ -53,18 +56,21 @@ public class ShootTarget : MonoBehaviour {
 		} else {*/
 		hp -= damage;
 		//}
-		Bleed();
+		
 		if (hp < 0) {
 			if(gameObject.tag == "Player") {
 				DataAccess.Instance.RemoveLive();
 				if(DataAccess.Instance.Lives <= 0) {
 					SceneManager.LoadScene("Gameover");
 				} else {
-					SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+					SceneManager.LoadScene(SceneManager.GetActiveScene().name);   //Comment to get 9 lives in a row
 				}
 			} else {
-				Destroy();
-			}
+                Bleed();
+                Animator animator = GetComponent<Animator>();
+                Enmy.Die();
+                Destroy();
+            }
 			if(dieSound != null) AudioSource.PlayClipAtPoint(dieSound, transform.position);
 		} else {
 			if(hitSound != null) AudioSource.PlayClipAtPoint(hitSound, transform.position);
@@ -72,10 +78,10 @@ public class ShootTarget : MonoBehaviour {
 	}
 
 	void Bleed() {
-
-	}
+        if (blood) { Instantiate(blood, transform.position, Quaternion.identity); }
+    }
 
 	void Destroy() {
-		Destroy(gameObject);
+		Destroy(gameObject, 0.75f);
 	}
 }

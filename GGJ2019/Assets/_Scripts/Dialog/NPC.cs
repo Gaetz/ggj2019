@@ -25,17 +25,24 @@ public class NPC : MonoBehaviour {
 	public void OnTriggerStay2D(Collider2D other) {
 		if (!isDialogDisplayed && other.gameObject.tag == "Player") {
 				isDialogDisplayed = true;
-				Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-				pos.y += dialogAbovePosition;
-				ChatBackground.position = pos;
+            //Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+            
+            //pos.y += dialogAbovePosition;
+				//ChatBackground.position = pos;
 				dialogSystem.EnterRangeOfNPC();
 				dialogSystem.dialogLines = sentences;
 				dialogSystem.TriggerDialog();
 		}
 	}
 
-	public void OnTriggerExit2D(Collider2D other) {
-		dialogSystem.OutOfRange();
-		isDialogDisplayed = false;
+	public void OnTriggerExit2D (Collider2D other) {
+        if (isDialogDisplayed && other.gameObject.tag == "Player")
+        {
+            Debug.Log("exited");
+            dialogSystem.OutOfRange();
+            isDialogDisplayed = false;
+        }
 	}
+
+    
 }
